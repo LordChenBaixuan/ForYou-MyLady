@@ -240,7 +240,7 @@
     }
 
     .poem {
-      min-height: 190px;
+      min-height: clamp(130px, 30vw, 190px);
       margin-bottom: clamp(14px, 3.5vw, 20px);
       font-family: "Caveat", cursive;
       font-size: clamp(1.55rem, 6vw, 2.05rem);
@@ -456,6 +456,15 @@
       border: none;
       border-radius: 50px;
       cursor: pointer;
+    }
+
+    /* ---------- Layar pendek: padatkan supaya semua muat ---------- */
+    @media (max-height: 680px) {
+      .card { padding: 20px; }
+      .heart { font-size: 44px; margin-bottom: 8px; }
+      .title { margin-bottom: 10px; }
+      .poem { min-height: 110px; margin-bottom: 12px; font-size: 1.4rem; }
+      .meter { margin-bottom: 14px; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -680,21 +689,39 @@
       let yesScale = 1;
 
       function move() {
+        // pakai visualViewport biar akurat di HP (bilah alamat ikut dihitung)
+        const vv = window.visualViewport;
+        const vw = (vv && vv.width) || window.innerWidth;
+        const vh = (vv && vv.height) || window.innerHeight;
+        const offX = (vv && vv.offsetLeft) || 0;
+        const offY = (vv && vv.offsetTop) || 0;
+
         const bw = btnNo.offsetWidth;
         const bh = btnNo.offsetHeight;
-        const pad = 24;
-        const topPad = 80; // hindari tombol musik di pojok kanan atas
-        const maxX = window.innerWidth - bw - pad;
-        const maxY = window.innerHeight - bh - pad;
+        const pad = 16;
+        const topPad = 76; // beri ruang untuk tombol musik di atas
 
-        let x, y, tries = 0;
+        // batas area aman — selalu di dalam layar
+        const minX = offX + pad;
+        const minY = offY + topPad;
+        const maxX = offX + vw - bw - pad;
+        const maxY = offY + vh - bh - pad;
+        const rangeX = Math.max(0, maxX - minX);
+        const rangeY = Math.max(0, maxY - minY);
+
         const prevX = parseFloat(btnNo.style.left) || 0;
         const prevY = parseFloat(btnNo.style.top) || 0;
+
+        let x, y, tries = 0;
         do {
-          x = pad + Math.random() * (maxX - pad);
-          y = topPad + Math.random() * (maxY - topPad);
+          x = minX + Math.random() * rangeX;
+          y = minY + Math.random() * rangeY;
           tries++;
         } while (tries < 10 && Math.abs(x - prevX) < bw && Math.abs(y - prevY) < bh);
+
+        // kunci final: tidak akan pernah keluar layar
+        x = Math.min(Math.max(x, minX), Math.max(minX, maxX));
+        y = Math.min(Math.max(y, minY), Math.max(minY, maxY));
 
         btnNo.classList.add("dodging");
         btnNo.style.left = x + "px";
@@ -704,10 +731,20 @@
         idx = (idx + 1) % labels.length;
         btnNo.innerHTML = '<i class="fa-solid fa-heart-circle-xmark" aria-hidden="true"></i> ' + labels[idx];
 
-        // tombol "Mau" makin menggoda (membesar, batasi biar tidak kebablasan)
-        yesScale = Math.min(yesScale + 0.08, 1.6);
+        // tombol "Mau" makin menggoda (membesar, dibatasi biar tak merusak tata letak)
+        yesScale = Math.min(yesScale + 0.06, 1.35);
         btnYes.style.transform = "scale(" + yesScale + ")";
       }
+
+      // jaga posisi tetap valid saat layar diputar / diubah ukurannya
+      window.addEventListener("resize", () => {
+        if (!btnNo.classList.contains("dodging")) return;
+        const vw = window.innerWidth, vh = window.innerHeight;
+        let x = Math.min(parseFloat(btnNo.style.left) || 0, vw - btnNo.offsetWidth - 16);
+        let y = Math.min(parseFloat(btnNo.style.top) || 0, vh - btnNo.offsetHeight - 16);
+        btnNo.style.left = Math.max(16, x) + "px";
+        btnNo.style.top = Math.max(16, y) + "px";
+      });
 
       btnNo.addEventListener("mouseenter", move);
       btnNo.addEventListener("pointerdown", (e) => { e.preventDefault(); move(); });
