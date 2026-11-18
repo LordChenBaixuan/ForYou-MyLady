@@ -652,9 +652,13 @@
         const petal = document.createElement("div");
         petal.className = "petal";
         petal.textContent = items[Math.floor(Math.random() * items.length)];
-        petal.style.left = Math.random() * 100 + "vw";
+        const size = Math.random() * 18 + 15;
+        // posisi dalam piksel & dibatasi lebar layar supaya TIDAK pernah
+        // keluar tepi kanan (penyebab halaman melebar / zoom-out di HP)
+        const maxLeft = Math.max(0, window.innerWidth - size - 6);
+        petal.style.left = Math.random() * maxLeft + "px";
         petal.style.animationDuration = Math.random() * 4 + 3 + "s";
-        petal.style.fontSize = Math.random() * 20 + 15 + "px";
+        petal.style.fontSize = size + "px";
         layer.appendChild(petal);
         setTimeout(() => petal.remove(), 7000);
       }, 240);
