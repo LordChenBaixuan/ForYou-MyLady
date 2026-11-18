@@ -36,6 +36,7 @@
     html,
     body {
       height: 100%;
+      overflow-x: hidden; /* cegah layar melar ke samping di HP */
     }
 
     body {
@@ -184,6 +185,7 @@
     }
 
     .card {
+      position: relative; /* jadi acuan tombol "Enggak" yang berpindah */
       width: 100%;
       padding: clamp(26px, 6vw, 44px);
       text-align: center;
@@ -294,7 +296,6 @@
 
     /* ---------- Tombol ---------- */
     .btn-area {
-      position: relative;
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
@@ -342,9 +343,9 @@
     }
 
     #btn-no.dodging {
-      position: fixed;
+      position: absolute; /* berpindah DI DALAM kartu, tak bikin layar melar */
       margin: 0;
-      z-index: 200;
+      z-index: 30;
       box-shadow: 0 8px 22px rgba(255, 77, 125, 0.35);
       transition: left 0.25s ease, top 0.25s ease;
     }
@@ -688,40 +689,30 @@
       let idx = 0;
       let yesScale = 1;
 
-      function move() {
-        // pakai visualViewport biar akurat di HP (bilah alamat ikut dihitung)
-        const vv = window.visualViewport;
-        const vw = (vv && vv.width) || window.innerWidth;
-        const vh = (vv && vv.height) || window.innerHeight;
-        const offX = (vv && vv.offsetLeft) || 0;
-        const offY = (vv && vv.offsetTop) || 0;
+      const card = document.querySelector(".card");
 
+      function move() {
+        // Tombol berpindah DI DALAM kartu (acuan: kartu, bukan layar).
+        // Ini membuatnya mustahil bikin halaman melar / browser zoom-out,
+        // dan otomatis responsif karena kartu sudah pas di semua perangkat.
+        const cw = card.clientWidth;
+        const ch = card.clientHeight;
         const bw = btnNo.offsetWidth;
         const bh = btnNo.offsetHeight;
-        const pad = 16;
-        const topPad = 76; // beri ruang untuk tombol musik di atas
+        const pad = 10;
 
-        // batas area aman — selalu di dalam layar
-        const minX = offX + pad;
-        const minY = offY + topPad;
-        const maxX = offX + vw - bw - pad;
-        const maxY = offY + vh - bh - pad;
-        const rangeX = Math.max(0, maxX - minX);
-        const rangeY = Math.max(0, maxY - minY);
+        const maxX = Math.max(pad, cw - bw - pad);
+        const maxY = Math.max(pad, ch - bh - pad);
 
         const prevX = parseFloat(btnNo.style.left) || 0;
         const prevY = parseFloat(btnNo.style.top) || 0;
 
         let x, y, tries = 0;
         do {
-          x = minX + Math.random() * rangeX;
-          y = minY + Math.random() * rangeY;
+          x = pad + Math.random() * (maxX - pad);
+          y = pad + Math.random() * (maxY - pad);
           tries++;
-        } while (tries < 10 && Math.abs(x - prevX) < bw && Math.abs(y - prevY) < bh);
-
-        // kunci final: tidak akan pernah keluar layar
-        x = Math.min(Math.max(x, minX), Math.max(minX, maxX));
-        y = Math.min(Math.max(y, minY), Math.max(minY, maxY));
+        } while (tries < 12 && Math.abs(x - prevX) < bw * 0.8 && Math.abs(y - prevY) < bh * 0.8);
 
         btnNo.classList.add("dodging");
         btnNo.style.left = x + "px";
@@ -732,19 +723,9 @@
         btnNo.innerHTML = '<i class="fa-solid fa-heart-circle-xmark" aria-hidden="true"></i> ' + labels[idx];
 
         // tombol "Mau" makin menggoda (membesar, dibatasi biar tak merusak tata letak)
-        yesScale = Math.min(yesScale + 0.06, 1.35);
+        yesScale = Math.min(yesScale + 0.05, 1.25);
         btnYes.style.transform = "scale(" + yesScale + ")";
       }
-
-      // jaga posisi tetap valid saat layar diputar / diubah ukurannya
-      window.addEventListener("resize", () => {
-        if (!btnNo.classList.contains("dodging")) return;
-        const vw = window.innerWidth, vh = window.innerHeight;
-        let x = Math.min(parseFloat(btnNo.style.left) || 0, vw - btnNo.offsetWidth - 16);
-        let y = Math.min(parseFloat(btnNo.style.top) || 0, vh - btnNo.offsetHeight - 16);
-        btnNo.style.left = Math.max(16, x) + "px";
-        btnNo.style.top = Math.max(16, y) + "px";
-      });
 
       btnNo.addEventListener("mouseenter", move);
       btnNo.addEventListener("pointerdown", (e) => { e.preventDefault(); move(); });
