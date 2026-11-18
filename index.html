@@ -54,7 +54,6 @@
       -webkit-text-size-adjust: 100%;
     }
 
-    /* cahaya lembut di latar */
     body::before {
       content: "";
       position: fixed;
@@ -84,14 +83,8 @@
     }
 
     @keyframes fall {
-      0% {
-        transform: translateY(0) rotate(0deg) scale(0.8);
-        opacity: 1;
-      }
-      100% {
-        transform: translateY(105vh) rotate(360deg) scale(1.2);
-        opacity: 0;
-      }
+      0%   { transform: translateY(0) rotate(0deg) scale(0.8); opacity: 1; }
+      100% { transform: translateY(105vh) rotate(360deg) scale(1.2); opacity: 0; }
     }
 
     .sparkle {
@@ -104,22 +97,94 @@
     }
 
     @keyframes sparkleAnim {
-      0% {
-        transform: translate(-50%, -50%) scale(0);
-        opacity: 1;
-      }
-      100% {
-        transform: translate(-50%, -50%) scale(1.5);
-        opacity: 0;
-      }
+      0%   { transform: translate(-50%, -50%) scale(0); opacity: 1; }
+      100% { transform: translate(-50%, -50%) scale(1.5); opacity: 0; }
+    }
+
+    /* partikel ledakan hati saat "Mau" diklik */
+    .burst {
+      position: fixed;
+      z-index: 9998;
+      pointer-events: none;
+      will-change: transform, opacity;
+      animation: burstUp linear forwards;
+    }
+
+    @keyframes burstUp {
+      0%   { transform: translate(0, 0) scale(0.4) rotate(0deg); opacity: 1; }
+      100% { transform: translate(var(--dx), var(--dy)) scale(1.3) rotate(var(--rot)); opacity: 0; }
+    }
+
+    /* ---------- Intro pembuka ---------- */
+    .intro {
+      position: fixed;
+      inset: 0;
+      z-index: 500;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 18px;
+      text-align: center;
+      padding: 24px;
+      background: linear-gradient(135deg, #ffe3f1 0%, #ffc6e0 100%);
+      transition: opacity 0.7s ease, visibility 0.7s ease;
+    }
+
+    .intro.hide {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .intro__envelope {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 110px;
+      min-height: 110px;
+      font-size: clamp(80px, 24vw, 120px);
+      color: var(--pink-strong);
+      cursor: pointer;
+      animation: beat 1s infinite alternate;
+      filter: drop-shadow(0 10px 24px rgba(255, 77, 125, 0.4));
+      transition: transform 0.3s ease;
+    }
+
+    .intro__envelope:active {
+      transform: scale(0.9);
+    }
+
+    .intro__text {
+      font-family: "Dancing Script", cursive;
+      font-size: clamp(1.6rem, 6vw, 2.3rem);
+      font-weight: 700;
+      color: var(--pink-dark);
+    }
+
+    .intro__hint {
+      font-size: 0.95rem;
+      color: #a0566f;
+      animation: floatHint 1.6s ease-in-out infinite;
     }
 
     /* ---------- Kartu utama ---------- */
-    .card {
+    .stage {
       position: relative;
       z-index: 10;
       width: 100%;
       max-width: 480px;
+      opacity: 0;
+      transform: translateY(20px) scale(0.96);
+      transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .stage.show {
+      opacity: 1;
+      transform: none;
+    }
+
+    .card {
+      width: 100%;
       padding: clamp(26px, 6vw, 44px);
       text-align: center;
       border: 1.5px solid rgba(255, 255, 255, 0.8);
@@ -128,13 +193,12 @@
       -webkit-backdrop-filter: blur(16px);
       backdrop-filter: blur(16px);
       box-shadow: 0 24px 60px rgba(227, 93, 144, 0.32);
-      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
-        background 0.4s ease;
+      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.4s ease;
     }
 
     @media (hover: hover) {
       .card:hover {
-        transform: translateY(-8px) scale(1.01);
+        transform: translateY(-6px) scale(1.01);
         background: rgba(255, 255, 255, 0.6);
       }
     }
@@ -143,8 +207,8 @@
     .heart {
       position: relative;
       display: inline-block;
-      margin-bottom: 14px;
-      font-size: clamp(54px, 15vw, 72px);
+      margin-bottom: 12px;
+      font-size: clamp(50px, 14vw, 68px);
       line-height: 1;
       color: var(--pink-strong);
     }
@@ -163,23 +227,13 @@
       animation: glow 0.85s infinite alternate;
     }
 
-    @keyframes beat {
-      to {
-        transform: scale(1.12);
-      }
-    }
-
-    @keyframes glow {
-      to {
-        transform: scale(1.25);
-        opacity: 0.1;
-      }
-    }
+    @keyframes beat { to { transform: scale(1.12); } }
+    @keyframes glow { to { transform: scale(1.25); opacity: 0.1; } }
 
     .title {
-      margin-bottom: clamp(14px, 3.5vw, 20px);
+      margin-bottom: clamp(12px, 3vw, 18px);
       font-family: "Dancing Script", cursive;
-      font-size: clamp(1.9rem, 7vw, 2.6rem);
+      font-size: clamp(1.8rem, 6.5vw, 2.5rem);
       font-weight: 700;
       letter-spacing: 0.5px;
       color: var(--pink-dark);
@@ -187,7 +241,7 @@
 
     .poem {
       min-height: 190px;
-      margin-bottom: clamp(18px, 4.5vw, 26px);
+      margin-bottom: clamp(14px, 3.5vw, 20px);
       font-family: "Caveat", cursive;
       font-size: clamp(1.55rem, 6vw, 2.05rem);
       line-height: 1.5;
@@ -205,10 +259,37 @@
       animation: blink 0.9s steps(2) infinite;
     }
 
-    @keyframes blink {
-      50% {
-        opacity: 0;
-      }
+    @keyframes blink { 50% { opacity: 0; } }
+
+    /* ---------- Meteran cinta ---------- */
+    .meter {
+      margin: 0 auto clamp(18px, 4.5vw, 26px);
+      max-width: 320px;
+    }
+
+    .meter__label {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 6px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--pink-dark);
+    }
+
+    .meter__track {
+      height: 12px;
+      border-radius: 50px;
+      background: rgba(255, 255, 255, 0.6);
+      overflow: hidden;
+      box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.08);
+    }
+
+    .meter__fill {
+      height: 100%;
+      width: 0;
+      border-radius: 50px;
+      background: linear-gradient(90deg, var(--pink-soft), var(--pink-strong));
+      transition: width 2.4s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
     /* ---------- Tombol ---------- */
@@ -246,7 +327,7 @@
 
     @media (hover: hover) {
       #btn-yes:hover {
-        transform: scale(1.12);
+        transform: scale(1.1);
         box-shadow: 0 10px 26px rgba(255, 77, 125, 0.55);
       }
     }
@@ -263,6 +344,9 @@
     #btn-no.dodging {
       position: fixed;
       margin: 0;
+      z-index: 200;
+      box-shadow: 0 8px 22px rgba(255, 77, 125, 0.35);
+      transition: left 0.25s ease, top 0.25s ease;
     }
 
     /* ---------- Tombol musik ---------- */
@@ -288,17 +372,9 @@
       transition: transform 0.3s ease;
     }
 
-    .music-btn.playing {
-      animation: spin 6s linear infinite;
-    }
+    .music-btn.playing { animation: spin 6s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
 
-    @keyframes spin {
-      to {
-        transform: rotate(360deg);
-      }
-    }
-
-    /* petunjuk kecil di tombol musik */
     .music-hint {
       position: fixed;
       top: calc(env(safe-area-inset-top, 0px) + 22px);
@@ -342,9 +418,7 @@
       z-index: 9999;
     }
 
-    .modal.show {
-      opacity: 1;
-    }
+    .modal.show { opacity: 1; }
 
     .modal__box {
       width: 100%;
@@ -358,15 +432,9 @@
       transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
 
-    .modal.show .modal__box {
-      transform: scale(1);
-    }
+    .modal.show .modal__box { transform: scale(1); }
 
-    .modal__emoji {
-      font-size: 62px;
-      line-height: 1;
-      animation: beat 0.6s infinite alternate;
-    }
+    .modal__emoji { font-size: 62px; line-height: 1; animation: beat 0.6s infinite alternate; }
 
     .modal__title {
       margin-top: 14px;
@@ -376,12 +444,7 @@
       color: #d11a53;
     }
 
-    .modal__text {
-      margin-top: 10px;
-      font-size: 0.97rem;
-      line-height: 1.6;
-      color: #666;
-    }
+    .modal__text { margin-top: 10px; font-size: 0.97rem; line-height: 1.6; color: #666; }
 
     .modal__btn {
       margin-top: 20px;
@@ -407,45 +470,113 @@
   </style>
 </head>
 <body>
+  <!-- Intro pembuka: ketuk amplop untuk membuka -->
+  <div class="intro" id="intro">
+    <div class="intro__text" id="introText">Ada sesuatu untukmu...</div>
+    <div class="intro__envelope" id="introOpen" role="button" tabindex="0" aria-label="Buka pesan">
+      <i class="fa-solid fa-envelope-open-text"></i>
+    </div>
+    <div class="intro__hint">ketuk untuk membuka 💌</div>
+  </div>
+
   <button class="music-btn" id="musicBtn" type="button" aria-label="Putar musik">
     <i class="fa-solid fa-music" aria-hidden="true"></i>
   </button>
-  <div class="music-hint" id="musicHint">Nyalakan musik 🎵</div>
+  <div class="music-hint hide" id="musicHint">Nyalakan musik 🎵</div>
 
   <div id="particle-layer" aria-hidden="true"></div>
 
-  <main class="card">
-    <div class="heart" aria-hidden="true">
-      <span class="glow"><i class="fa-solid fa-heart"></i></span>
-      <span class="core"><i class="fa-solid fa-heart"></i></span>
-    </div>
+  <div class="stage" id="stage">
+    <main class="card">
+      <div class="heart" aria-hidden="true">
+        <span class="glow"><i class="fa-solid fa-heart"></i></span>
+        <span class="core"><i class="fa-solid fa-heart"></i></span>
+      </div>
 
-    <h1 class="title">Untuk Kamu, Cintaku ✨</h1>
-    <p class="poem" id="poem"></p>
+      <h1 class="title" id="title">Untuk Kamu, Cintaku ✨</h1>
+      <p class="poem" id="poem"></p>
 
-    <div class="btn-area">
-      <button class="btn" id="btn-yes" type="button">
-        <i class="fa-solid fa-heart-circle-check" aria-hidden="true"></i> Mau!
-      </button>
-      <button class="btn" id="btn-no" type="button">
-        <i class="fa-solid fa-heart-circle-xmark" aria-hidden="true"></i> Enggak
-      </button>
-    </div>
-  </main>
+      <div class="meter" aria-hidden="true">
+        <div class="meter__label">
+          <span>Kadar sayang aku ke kamu</span>
+          <span id="meterPct">0%</span>
+        </div>
+        <div class="meter__track">
+          <div class="meter__fill" id="meterFill"></div>
+        </div>
+      </div>
+
+      <div class="btn-area">
+        <button class="btn" id="btn-yes" type="button">
+          <i class="fa-solid fa-heart-circle-check" aria-hidden="true"></i> Mau!
+        </button>
+        <button class="btn" id="btn-no" type="button">
+          <i class="fa-solid fa-heart-circle-xmark" aria-hidden="true"></i> Enggak
+        </button>
+      </div>
+    </main>
+  </div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
   <script>
     "use strict";
 
+    /* =======================================================
+       PERSONALISASI — ganti bagian ini sesuka kamu ngabs
+       ======================================================= */
+    const CONFIG = {
+      namaDia: "",        // contoh: "Dinda" (kosongkan kalau tak mau pakai nama)
+      namaKamu: "",       // contoh: "Aniq"
+      judul: "Untuk Kamu, Cintaku ✨",
+    };
+    /* ======================================================= */
+
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    /* ---------- 1. Puisi yang mengetik & berganti bait ---------- */
+    // terapkan nama ke judul kalau diisi
+    (function applyName() {
+      if (CONFIG.namaDia) {
+        document.getElementById("title").textContent = "Untuk " + CONFIG.namaDia + ", Cintaku ✨";
+      } else if (CONFIG.judul) {
+        document.getElementById("title").textContent = CONFIG.judul;
+      }
+    })();
+
+    /* ---------- Intro: buka amplop ---------- */
+    (function intro() {
+      const intro = document.getElementById("intro");
+      const openBtn = document.getElementById("introOpen");
+      const stage = document.getElementById("stage");
+      const musicHint = document.getElementById("musicHint");
+      let opened = false;
+
+      function open() {
+        if (opened) return;
+        opened = true;
+        intro.classList.add("hide");
+        setTimeout(() => {
+          intro.style.display = "none";
+          stage.classList.add("show");
+          startPoem();
+          musicHint.classList.remove("hide");
+          setTimeout(() => musicHint.classList.add("hide"), 6000);
+        }, 500);
+      }
+
+      openBtn.addEventListener("click", open);
+      openBtn.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") { e.preventDefault(); open(); }
+      });
+    })();
+
+    /* ---------- Puisi yang mengetik & berganti bait ---------- */
+    let startPoem;
     (function typePoem() {
       const el = document.getElementById("poem");
+      const nama = CONFIG.namaDia ? CONFIG.namaDia : "kamu";
 
-      // beberapa bait romantis yang berganti bergantian
       const verses = [
-        "Di antara miliaran manusia,\nhatiku cuma berhenti di kamu.\nKamu bukan sekadar pilihan,\nkamu adalah jawaban dari doaku. 🌙",
+        "Di antara miliaran manusia,\nhatiku cuma berhenti di " + nama + ".\nKamu bukan sekadar pilihan,\nkamu jawaban dari setiap doaku. 🌙",
         "Senja boleh pergi, bintang boleh padam,\ntapi rasaku ke kamu nggak pernah malam.\nKamu rumah yang selalu aku rindu,\ntempat pulang paling nyaman buatku. 🏡💕",
         "Roses are red, violets are blue,\ndunia ini fana, yang nyata cuma kamu.\nAku nggak minta yang sempurna,\naku cuma minta kamu... selamanya. 🌹",
         "Mau nggak, menata masa depan bareng aku?\nPelan-pelan aja, asal sama kamu.\nSampai rambut memutih, sampai lelah menua,\naku tetap mau memilih kamu. 🥰🌸",
@@ -460,6 +591,7 @@
 
         if (reduceMotion) {
           el.innerHTML = text.replace(/\n/g, "<br>");
+          setTimeout(() => { v = (v + 1) % verses.length; showVerse(); }, 5000);
           return;
         }
 
@@ -475,20 +607,32 @@
             i++;
             setTimeout(tick, 55);
           } else {
-            // tahan sebentar, lalu lanjut ke bait berikutnya (berulang)
-            setTimeout(() => {
-              v = (v + 1) % verses.length;
-              showVerse();
-            }, 3800);
+            setTimeout(() => { v = (v + 1) % verses.length; showVerse(); }, 3800);
           }
         }
         tick();
       }
 
-      showVerse();
+      startPoem = showVerse;
     })();
 
-    /* ---------- 2. Kelopak & hati berguguran ---------- */
+    /* ---------- Meteran cinta ---------- */
+    (function loveMeter() {
+      const fill = document.getElementById("meterFill");
+      const pct = document.getElementById("meterPct");
+      // mulai isi sesaat setelah kartu muncul
+      setTimeout(() => {
+        fill.style.width = "100%";
+        let n = 0;
+        const timer = setInterval(() => {
+          n += 4;
+          if (n >= 100) { n = 100; clearInterval(timer); pct.textContent = "∞%"; }
+          else pct.textContent = n + "%";
+        }, 95);
+      }, 1200);
+    })();
+
+    /* ---------- Kelopak & hati berguguran ---------- */
     (function fallingPetals() {
       if (reduceMotion) return;
       const layer = document.getElementById("particle-layer");
@@ -506,7 +650,7 @@
       }, 240);
     })();
 
-    /* ---------- 3. Jejak kilauan (pointer halus saja) ---------- */
+    /* ---------- Jejak kilauan (pointer halus saja) ---------- */
     (function sparkleTrail() {
       if (reduceMotion || !window.matchMedia("(pointer: fine)").matches) return;
       const layer = document.getElementById("particle-layer");
@@ -524,31 +668,52 @@
       });
     })();
 
-    /* ---------- 4. Tombol "Enggak" yang menghindar ---------- */
+    /* ---------- Tombol "Enggak": pindah + ganti kata, "Mau" membesar ---------- */
     (function dodgeButton() {
-      const btn = document.getElementById("btn-no");
+      const btnNo = document.getElementById("btn-no");
+      const btnYes = document.getElementById("btn-yes");
+      const labels = [
+        "Enggak", "Yakin?", "Mikir lagi 🥺", "Jangan dong", "Masa sih?",
+        "Beneran?", "Coba lagi", "Nggak bisa 😚", "Hehe", "Sini klik Mau",
+      ];
+      let idx = 0;
+      let yesScale = 1;
 
       function move() {
-        const bw = btn.offsetWidth;
-        const bh = btn.offsetHeight;
-        const maxX = window.innerWidth - bw - 12;
-        const maxY = window.innerHeight - bh - 12;
-        const x = Math.max(12, Math.random() * maxX);
-        const y = Math.max(12, Math.random() * maxY);
+        const bw = btnNo.offsetWidth;
+        const bh = btnNo.offsetHeight;
+        const pad = 24;
+        const topPad = 80; // hindari tombol musik di pojok kanan atas
+        const maxX = window.innerWidth - bw - pad;
+        const maxY = window.innerHeight - bh - pad;
 
-        btn.classList.add("dodging");
-        btn.style.left = x + "px";
-        btn.style.top = y + "px";
+        let x, y, tries = 0;
+        const prevX = parseFloat(btnNo.style.left) || 0;
+        const prevY = parseFloat(btnNo.style.top) || 0;
+        do {
+          x = pad + Math.random() * (maxX - pad);
+          y = topPad + Math.random() * (maxY - topPad);
+          tries++;
+        } while (tries < 10 && Math.abs(x - prevX) < bw && Math.abs(y - prevY) < bh);
+
+        btnNo.classList.add("dodging");
+        btnNo.style.left = x + "px";
+        btnNo.style.top = y + "px";
+
+        // ganti kata tiap lari
+        idx = (idx + 1) % labels.length;
+        btnNo.innerHTML = '<i class="fa-solid fa-heart-circle-xmark" aria-hidden="true"></i> ' + labels[idx];
+
+        // tombol "Mau" makin menggoda (membesar, batasi biar tidak kebablasan)
+        yesScale = Math.min(yesScale + 0.08, 1.6);
+        btnYes.style.transform = "scale(" + yesScale + ")";
       }
 
-      btn.addEventListener("mouseenter", move);
-      btn.addEventListener("pointerdown", (e) => {
-        e.preventDefault();
-        move();
-      });
+      btnNo.addEventListener("mouseenter", move);
+      btnNo.addEventListener("pointerdown", (e) => { e.preventDefault(); move(); });
     })();
 
-    /* ---------- 5. Musik piano romantis (Tone.js + reverb) ---------- */
+    /* ---------- Musik piano romantis (Tone.js + reverb) ---------- */
     (function music() {
       const btn = document.getElementById("musicBtn");
       const hint = document.getElementById("musicHint");
@@ -556,103 +721,65 @@
       let playing = false;
 
       function build() {
-        // reverb untuk kesan hangat & "ruang"
         const reverb = new Tone.Reverb({ decay: 4, wet: 0.35 }).toDestination();
 
-        // melodi utama — lembut seperti music box / piano
         const piano = new Tone.PolySynth(Tone.Synth, {
           oscillator: { type: "sine" },
           envelope: { attack: 0.02, decay: 0.5, sustain: 0.3, release: 1.8 },
         }).connect(reverb);
         piano.volume.value = -9;
 
-        // pad hangat sebagai latar chord
         const pad = new Tone.PolySynth(Tone.Synth, {
           oscillator: { type: "triangle" },
           envelope: { attack: 1.4, decay: 0.6, sustain: 0.7, release: 3 },
         }).connect(reverb);
         pad.volume.value = -20;
 
-        // bass lembut
         const bass = new Tone.Synth({
           oscillator: { type: "sine" },
           envelope: { attack: 0.05, decay: 0.3, sustain: 0.6, release: 1.5 },
         }).connect(reverb);
         bass.volume.value = -16;
 
-        // melodi 8 birama, mengalir & manis (C mayor)
         const melody = [
-          { time: "0:0", note: "E4", dur: "4n" },
-          { time: "0:1", note: "G4", dur: "4n" },
-          { time: "0:2", note: "C5", dur: "4n" },
-          { time: "0:3", note: "B4", dur: "4n" },
-          { time: "1:0", note: "A4", dur: "4n" },
-          { time: "1:1", note: "F4", dur: "4n" },
-          { time: "1:2", note: "G4", dur: "2n" },
-          { time: "2:0", note: "D4", dur: "4n" },
-          { time: "2:1", note: "F4", dur: "4n" },
-          { time: "2:2", note: "A4", dur: "4n" },
-          { time: "2:3", note: "G4", dur: "4n" },
-          { time: "3:0", note: "E4", dur: "4n" },
-          { time: "3:1", note: "C4", dur: "4n" },
-          { time: "3:2", note: "D4", dur: "2n" },
-          { time: "4:0", note: "C5", dur: "4n" },
-          { time: "4:1", note: "B4", dur: "4n" },
-          { time: "4:2", note: "A4", dur: "4n" },
-          { time: "4:3", note: "G4", dur: "4n" },
-          { time: "5:0", note: "F4", dur: "4n" },
-          { time: "5:1", note: "A4", dur: "4n" },
-          { time: "5:2", note: "C5", dur: "2n" },
-          { time: "6:0", note: "B4", dur: "4n" },
-          { time: "6:1", note: "G4", dur: "4n" },
-          { time: "6:2", note: "A4", dur: "4n" },
-          { time: "6:3", note: "F4", dur: "4n" },
-          { time: "7:0", note: "E4", dur: "2n" },
+          { time: "0:0", note: "E4", dur: "4n" }, { time: "0:1", note: "G4", dur: "4n" },
+          { time: "0:2", note: "C5", dur: "4n" }, { time: "0:3", note: "B4", dur: "4n" },
+          { time: "1:0", note: "A4", dur: "4n" }, { time: "1:1", note: "F4", dur: "4n" },
+          { time: "1:2", note: "G4", dur: "2n" }, { time: "2:0", note: "D4", dur: "4n" },
+          { time: "2:1", note: "F4", dur: "4n" }, { time: "2:2", note: "A4", dur: "4n" },
+          { time: "2:3", note: "G4", dur: "4n" }, { time: "3:0", note: "E4", dur: "4n" },
+          { time: "3:1", note: "C4", dur: "4n" }, { time: "3:2", note: "D4", dur: "2n" },
+          { time: "4:0", note: "C5", dur: "4n" }, { time: "4:1", note: "B4", dur: "4n" },
+          { time: "4:2", note: "A4", dur: "4n" }, { time: "4:3", note: "G4", dur: "4n" },
+          { time: "5:0", note: "F4", dur: "4n" }, { time: "5:1", note: "A4", dur: "4n" },
+          { time: "5:2", note: "C5", dur: "2n" }, { time: "6:0", note: "B4", dur: "4n" },
+          { time: "6:1", note: "G4", dur: "4n" }, { time: "6:2", note: "A4", dur: "4n" },
+          { time: "6:3", note: "F4", dur: "4n" }, { time: "7:0", note: "E4", dur: "2n" },
           { time: "7:2", note: "C4", dur: "2n" },
         ];
 
         const chords = [
-          { time: "0:0", notes: ["C3", "E3", "G3"] },
-          { time: "1:0", notes: ["F3", "A3", "C4"] },
-          { time: "2:0", notes: ["D3", "F3", "A3"] },
-          { time: "3:0", notes: ["G3", "B3", "D4"] },
-          { time: "4:0", notes: ["A2", "C3", "E3"] },
-          { time: "5:0", notes: ["F3", "A3", "C4"] },
-          { time: "6:0", notes: ["G3", "B3", "D4"] },
-          { time: "7:0", notes: ["C3", "E3", "G3"] },
+          { time: "0:0", notes: ["C3", "E3", "G3"] }, { time: "1:0", notes: ["F3", "A3", "C4"] },
+          { time: "2:0", notes: ["D3", "F3", "A3"] }, { time: "3:0", notes: ["G3", "B3", "D4"] },
+          { time: "4:0", notes: ["A2", "C3", "E3"] }, { time: "5:0", notes: ["F3", "A3", "C4"] },
+          { time: "6:0", notes: ["G3", "B3", "D4"] }, { time: "7:0", notes: ["C3", "E3", "G3"] },
         ];
 
         const bassline = [
-          { time: "0:0", note: "C2" },
-          { time: "1:0", note: "F2" },
-          { time: "2:0", note: "D2" },
-          { time: "3:0", note: "G2" },
-          { time: "4:0", note: "A1" },
-          { time: "5:0", note: "F2" },
-          { time: "6:0", note: "G2" },
-          { time: "7:0", note: "C2" },
+          { time: "0:0", note: "C2" }, { time: "1:0", note: "F2" },
+          { time: "2:0", note: "D2" }, { time: "3:0", note: "G2" },
+          { time: "4:0", note: "A1" }, { time: "5:0", note: "F2" },
+          { time: "6:0", note: "G2" }, { time: "7:0", note: "C2" },
         ];
 
-        const melodyPart = new Tone.Part((time, v) => {
-          piano.triggerAttackRelease(v.note, v.dur, time);
-        }, melody);
-        melodyPart.loop = true;
-        melodyPart.loopEnd = "8m";
-        melodyPart.start(0);
+        const mp = new Tone.Part((t, v) => piano.triggerAttackRelease(v.note, v.dur, t), melody);
+        mp.loop = true; mp.loopEnd = "8m"; mp.start(0);
 
-        const padPart = new Tone.Part((time, v) => {
-          pad.triggerAttackRelease(v.notes, "1m", time);
-        }, chords);
-        padPart.loop = true;
-        padPart.loopEnd = "8m";
-        padPart.start(0);
+        const pp = new Tone.Part((t, v) => pad.triggerAttackRelease(v.notes, "1m", t), chords);
+        pp.loop = true; pp.loopEnd = "8m"; pp.start(0);
 
-        const bassPart = new Tone.Part((time, v) => {
-          bass.triggerAttackRelease(v.note, "1m", time);
-        }, bassline);
-        bassPart.loop = true;
-        bassPart.loopEnd = "8m";
-        bassPart.start(0);
+        const bp = new Tone.Part((t, v) => bass.triggerAttackRelease(v.note, "1m", t), bassline);
+        bp.loop = true; bp.loopEnd = "8m"; bp.start(0);
 
         Tone.Transport.bpm.value = 72;
         built = true;
@@ -677,27 +804,49 @@
           btn.setAttribute("aria-label", "Putar musik");
         }
       });
-
-      // sembunyikan petunjuk otomatis setelah beberapa detik
-      setTimeout(() => hint.classList.add("hide"), 6000);
     })();
 
-    /* ---------- 6. Tombol "Mau" -> modal ---------- */
+    /* ---------- Ledakan hati ---------- */
+    function heartBurst(x, y) {
+      if (reduceMotion) return;
+      const emojis = ["❤️", "💖", "💕", "🌹", "✨", "💗"];
+      for (let i = 0; i < 28; i++) {
+        const p = document.createElement("div");
+        p.className = "burst";
+        p.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+        p.style.left = x + "px";
+        p.style.top = y + "px";
+        p.style.fontSize = Math.random() * 18 + 16 + "px";
+        const ang = Math.random() * Math.PI * 2;
+        const dist = Math.random() * 220 + 80;
+        p.style.setProperty("--dx", Math.cos(ang) * dist + "px");
+        p.style.setProperty("--dy", (Math.sin(ang) * dist - 60) + "px");
+        p.style.setProperty("--rot", (Math.random() * 720 - 360) + "deg");
+        p.style.animationDuration = Math.random() * 0.8 + 1.1 + "s";
+        document.body.appendChild(p);
+        setTimeout(() => p.remove(), 2000);
+      }
+    }
+
+    /* ---------- Tombol "Mau" -> ledakan + modal ---------- */
     (function acceptButton() {
-      document.getElementById("btn-yes").addEventListener("click", () => {
+      document.getElementById("btn-yes").addEventListener("click", (e) => {
+        const r = e.currentTarget.getBoundingClientRect();
+        heartBurst(r.left + r.width / 2, r.top + r.height / 2);
+
+        const pesanDari = CONFIG.namaKamu ? "<br><br>— " + CONFIG.namaKamu + " 💌" : "";
         const modal = document.createElement("div");
         modal.className = "modal";
         modal.innerHTML =
           '<div class="modal__box">' +
           '<div class="modal__emoji">💖</div>' +
           '<h2 class="modal__title">Akhirnya... kamu bilang iya 🥰</h2>' +
-          '<p class="modal__text">Makasih ya udah mau. Mulai hari ini, setiap pagiku punya alasan ' +
+          '<p class="modal__text">Makasih ya udah mau. Mulai hari ini setiap pagiku punya alasan ' +
           "buat senyum, dan setiap malamku punya nama buat didoakan: kamu. " +
-          "Aku janji jaga kamu sebaik-baiknya. 🌹✨</p>" +
+          "Aku janji jaga kamu sebaik-baiknya. 🌹✨" + pesanDari + "</p>" +
           '<button class="modal__btn" type="button">I Love You Too! ❤️</button>' +
           "</div>";
         document.body.appendChild(modal);
-
         requestAnimationFrame(() => modal.classList.add("show"));
 
         function close() {
@@ -705,9 +854,7 @@
           setTimeout(() => modal.remove(), 400);
         }
         modal.querySelector(".modal__btn").addEventListener("click", close);
-        modal.addEventListener("click", (e) => {
-          if (e.target === modal) close();
-        });
+        modal.addEventListener("click", (ev) => { if (ev.target === modal) close(); });
       });
     })();
   </script>
