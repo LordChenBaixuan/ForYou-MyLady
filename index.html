@@ -1,392 +1,715 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Khusus Untuk Kamu ❤️</title>
-    <!-- Bootstrap 5 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome (Ikon Premium) -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <!-- Google Fonts (Font Romantis) -->
-    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#ffd1eb" />
+  <title>Khusus Untuk Kamu</title>
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            /* Latar belakang gradasi senja romantis */
-            background: linear-gradient(135deg, #ffeef8 0%, #ffd1eb 50%, #ffb6c1 100%);
-            font-family: 'Poppins', sans-serif;
-            overflow: hidden;
-            position: relative;
-        }
-        /* Efek Kelopak Mawar & Hati Gugur */
-        .rose-petal {
-            position: absolute;
-            top: -20px;
-            pointer-events: none;
-            animation: fall linear infinite;
-            z-index: 1;
-            filter: drop-shadow(0 2px 5px rgba(0,0,0,0.1));
-        }
-        @keyframes fall {
-            0% { transform: translateY(0) rotate(0deg) scale(0.8); opacity: 1; }
-            100% { transform: translateY(105vh) rotate(360deg) scale(1.2); opacity: 0; }
-        }
-        /* Efek Jejak Kilauan Kursor (Sparkle Trail) */
-        .sparkle {
-            position: absolute;
-            pointer-events: none;
-            background: radial-gradient(circle, #fff 20%, rgba(255,182,193,0.8) 60%, transparent 100%);
-            border-radius: 50%;
-            animation: sparkleAnim 0.8s linear forwards;
-            z-index: 999;
-        }
-        @keyframes sparkleAnim {
-            0% { transform: translate(-50%, -50%) scale(0); opacity: 1; }
-            100% { transform: translate(-50%, -50%) scale(1.5); opacity: 0; }
-        }
-        /* Card Desain Glassmorphism Premium */
-        .custom-card {
-            background: rgba(255, 255, 255, 0.45);
-            border: 2px solid rgba(255, 255, 255, 0.7) !important;
-            border-radius: 30px !important;
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            z-index: 10;
-            max-width: 480px;
-            width: 90%;
-            box-shadow: 0 20px 50px rgba(227, 93, 144, 0.3) !important;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        .custom-card:hover {
-            transform: translateY(-8px) scale(1.01);
-            background: rgba(255, 255, 255, 0.55);
-        }
-        /* Ikon Hati Berdenyut Elegan */
-        .heart-container {
-            position: relative;
-            display: inline-block;
-            margin-bottom: 15px;
-        }
-        .heart-icon {
-            font-size: 75px;
-            color: #ff4d7d;
-            animation: beat 0.8s infinite alternate;
-            filter: drop-shadow(0 5px 15px rgba(255, 77, 125, 0.4));
-        }
-        .heart-glow {
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            font-size: 75px;
-            color: #ff4d7d;
-            animation: glow 0.8s infinite alternate;
-            opacity: 0.5;
-            filter: blur(10px);
-        }
-        /* Teks Puisi Estetik */
-        .poem {
-            font-family: 'Caveat', cursive;
-            font-size: 2rem;
-            color: #4a4a4a;
-            line-height: 1.5;
-            min-height: 150px;
-            text-shadow: 1px 1px 2px rgba(255,255,255,0.8);
-        }
-        /* Kontainer Tombol Interaktif */
-        .btn-wrapper {
-            position: relative;
-            height: 70px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .custom-btn {
-            font-weight: 600;
-            letter-spacing: 0.5px;
-            padding: 12px 35px !important;
-            transition: all 0.3s ease;
-        }
-        #btn-yes {
-            background: linear-gradient(45deg, #ff4d7d, #ff758c);
-            border: none;
-            z-index: 15;
-        }
-        #btn-yes:hover {
-            transform: scale(1.15);
-            box-shadow: 0 10px 25px rgba(255, 77, 125, 0.5) !important;
-        }
-        #btn-no {
-            position: absolute;
-            transition: all 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            z-index: 20;
-        }
-        /* Animasi */
-        @keyframes beat { to { transform: scale(1.12); } }
-        @keyframes glow { to { transform: scale(1.25); opacity: 0.1; } }
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Dancing+Script:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap"
+    rel="stylesheet"
+  />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+  />
 
-        /* Musik Kontrol Pojok Atas */
-        .music-control {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            z-index: 100;
-            background: rgba(255,255,255,0.6);
-            border-radius: 50%;
-            width: 45px;
-            height: 45px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-            backdrop-filter: blur(5px);
-        }
-    </style>
+  <style>
+    :root {
+      --pink-strong: #ff4d7d;
+      --pink-soft: #ff758c;
+      --pink-dark: #c92a52;
+      --text: #4a4a4a;
+    }
+
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      height: 100%;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      min-height: 100dvh;
+      padding: clamp(16px, 4vw, 32px);
+      background: linear-gradient(135deg, #fff0f8 0%, #ffd9ee 45%, #ffbcd4 100%);
+      background-attachment: fixed;
+      font-family: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      color: var(--text);
+      overflow-x: hidden;
+      -webkit-tap-highlight-color: transparent;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    /* cahaya lembut di latar */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.55), transparent 42%),
+        radial-gradient(circle at 80% 85%, rgba(255, 170, 205, 0.45), transparent 48%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ---------- Lapisan partikel ---------- */
+    #particle-layer {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .petal {
+      position: absolute;
+      top: -40px;
+      will-change: transform, opacity;
+      animation: fall linear forwards;
+      filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.1));
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(0) rotate(0deg) scale(0.8);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(105vh) rotate(360deg) scale(1.2);
+        opacity: 0;
+      }
+    }
+
+    .sparkle {
+      position: absolute;
+      pointer-events: none;
+      border-radius: 50%;
+      background: radial-gradient(circle, #fff 20%, rgba(255, 182, 193, 0.8) 60%, transparent 100%);
+      animation: sparkleAnim 0.8s linear forwards;
+      z-index: 2;
+    }
+
+    @keyframes sparkleAnim {
+      0% {
+        transform: translate(-50%, -50%) scale(0);
+        opacity: 1;
+      }
+      100% {
+        transform: translate(-50%, -50%) scale(1.5);
+        opacity: 0;
+      }
+    }
+
+    /* ---------- Kartu utama ---------- */
+    .card {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      max-width: 480px;
+      padding: clamp(26px, 6vw, 44px);
+      text-align: center;
+      border: 1.5px solid rgba(255, 255, 255, 0.8);
+      border-radius: 32px;
+      background: rgba(255, 255, 255, 0.5);
+      -webkit-backdrop-filter: blur(16px);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 24px 60px rgba(227, 93, 144, 0.32);
+      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+        background 0.4s ease;
+    }
+
+    @media (hover: hover) {
+      .card:hover {
+        transform: translateY(-8px) scale(1.01);
+        background: rgba(255, 255, 255, 0.6);
+      }
+    }
+
+    /* ---------- Ikon hati ---------- */
+    .heart {
+      position: relative;
+      display: inline-block;
+      margin-bottom: 14px;
+      font-size: clamp(54px, 15vw, 72px);
+      line-height: 1;
+      color: var(--pink-strong);
+    }
+
+    .heart .core {
+      position: relative;
+      animation: beat 0.85s infinite alternate;
+      filter: drop-shadow(0 5px 15px rgba(255, 77, 125, 0.4));
+    }
+
+    .heart .glow {
+      position: absolute;
+      inset: 0;
+      opacity: 0.5;
+      filter: blur(10px);
+      animation: glow 0.85s infinite alternate;
+    }
+
+    @keyframes beat {
+      to {
+        transform: scale(1.12);
+      }
+    }
+
+    @keyframes glow {
+      to {
+        transform: scale(1.25);
+        opacity: 0.1;
+      }
+    }
+
+    .title {
+      margin-bottom: clamp(14px, 3.5vw, 20px);
+      font-family: "Dancing Script", cursive;
+      font-size: clamp(1.9rem, 7vw, 2.6rem);
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      color: var(--pink-dark);
+    }
+
+    .poem {
+      min-height: 190px;
+      margin-bottom: clamp(18px, 4.5vw, 26px);
+      font-family: "Caveat", cursive;
+      font-size: clamp(1.55rem, 6vw, 2.05rem);
+      line-height: 1.5;
+      color: #4a3a40;
+      text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.85);
+    }
+
+    .poem .cursor {
+      display: inline-block;
+      width: 2px;
+      height: 1.1em;
+      margin-left: 2px;
+      background: var(--pink-strong);
+      vertical-align: text-bottom;
+      animation: blink 0.9s steps(2) infinite;
+    }
+
+    @keyframes blink {
+      50% {
+        opacity: 0;
+      }
+    }
+
+    /* ---------- Tombol ---------- */
+    .btn-area {
+      position: relative;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      min-height: 70px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 34px;
+      font: inherit;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      color: #fff;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      touch-action: manipulation;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    #btn-yes {
+      background: linear-gradient(45deg, var(--pink-strong), var(--pink-soft));
+      box-shadow: 0 6px 18px rgba(255, 77, 125, 0.38);
+      z-index: 15;
+    }
+
+    @media (hover: hover) {
+      #btn-yes:hover {
+        transform: scale(1.12);
+        box-shadow: 0 10px 26px rgba(255, 77, 125, 0.55);
+      }
+    }
+
+    #btn-no {
+      color: var(--text);
+      background: #fff;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      transition: transform 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      z-index: 20;
+    }
+
+    #btn-no.dodging {
+      position: fixed;
+      margin: 0;
+    }
+
+    /* ---------- Tombol musik ---------- */
+    .music-btn {
+      position: fixed;
+      top: calc(env(safe-area-inset-top, 0px) + 16px);
+      right: calc(env(safe-area-inset-right, 0px) + 16px);
+      width: 48px;
+      height: 48px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 18px;
+      color: var(--pink-strong);
+      background: rgba(255, 255, 255, 0.65);
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      -webkit-backdrop-filter: blur(6px);
+      backdrop-filter: blur(6px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      z-index: 100;
+      transition: transform 0.3s ease;
+    }
+
+    .music-btn.playing {
+      animation: spin 6s linear infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* petunjuk kecil di tombol musik */
+    .music-hint {
+      position: fixed;
+      top: calc(env(safe-area-inset-top, 0px) + 22px);
+      right: calc(env(safe-area-inset-right, 0px) + 74px);
+      padding: 6px 12px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--pink-dark);
+      background: rgba(255, 255, 255, 0.85);
+      border-radius: 20px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      white-space: nowrap;
+      z-index: 100;
+      animation: floatHint 1.6s ease-in-out infinite;
+    }
+
+    .music-hint.hide {
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+    }
+
+    @keyframes floatHint {
+      0%, 100% { transform: translateX(0); }
+      50% { transform: translateX(4px); }
+    }
+
+    /* ---------- Modal ---------- */
+    .modal {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 16px;
+      background: rgba(0, 0, 0, 0.5);
+      -webkit-backdrop-filter: blur(8px);
+      backdrop-filter: blur(8px);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      z-index: 9999;
+    }
+
+    .modal.show {
+      opacity: 1;
+    }
+
+    .modal__box {
+      width: 100%;
+      max-width: 400px;
+      padding: clamp(28px, 7vw, 42px);
+      text-align: center;
+      background: #fff;
+      border-radius: 26px;
+      box-shadow: 0 15px 34px rgba(0, 0, 0, 0.22);
+      transform: scale(0.7);
+      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .modal.show .modal__box {
+      transform: scale(1);
+    }
+
+    .modal__emoji {
+      font-size: 62px;
+      line-height: 1;
+      animation: beat 0.6s infinite alternate;
+    }
+
+    .modal__title {
+      margin-top: 14px;
+      font-family: "Dancing Script", cursive;
+      font-size: 2rem;
+      font-weight: 700;
+      color: #d11a53;
+    }
+
+    .modal__text {
+      margin-top: 10px;
+      font-size: 0.97rem;
+      line-height: 1.6;
+      color: #666;
+    }
+
+    .modal__btn {
+      margin-top: 20px;
+      padding: 11px 30px;
+      font: inherit;
+      font-weight: 600;
+      color: #fff;
+      background: linear-gradient(45deg, var(--pink-strong), var(--pink-soft));
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+      }
+    }
+  </style>
 </head>
 <body>
+  <button class="music-btn" id="musicBtn" type="button" aria-label="Putar musik">
+    <i class="fa-solid fa-music" aria-hidden="true"></i>
+  </button>
+  <div class="music-hint" id="musicHint">Nyalakan musik 🎵</div>
 
-    <!-- Musik Latar Belakang (Melodi Piano Custom, dibuat langsung di browser dengan Tone.js) -->
-    <div class="music-control" id="musicBtn">
-        <i class="fa-solid fa-music text-danger"></i>
+  <div id="particle-layer" aria-hidden="true"></div>
+
+  <main class="card">
+    <div class="heart" aria-hidden="true">
+      <span class="glow"><i class="fa-solid fa-heart"></i></span>
+      <span class="core"><i class="fa-solid fa-heart"></i></span>
     </div>
 
-    <!-- Wadah partikel mawar gugur -->
-    <div id="rose-container"></div>
+    <h1 class="title">Untuk Kamu, Cintaku ✨</h1>
+    <p class="poem" id="poem"></p>
 
-    <!-- Card Utama Glassmorphism -->
-    <div class="card custom-card shadow p-4 text-center border-0">
-        <div class="card-body">
-            <div class="heart-container">
-                <div class="heart-glow"><i class="fa-solid fa-heart"></i></div>
-                <div class="heart-icon"><i class="fa-solid fa-heart"></i></div>
-            </div>
-
-            <h1 class="h3 fw-bold mb-4" style="color: #c92a52; letter-spacing: 0.5px;">Hai Manis... ✨</h1>
-            <p class="card-text poem mb-4" id="typed-poem"></p>
-
-            <!-- Area Tombol -->
-            <div class="btn-wrapper mt-4">
-                <button class="btn btn-danger btn-lg rounded-pill custom-btn shadow me-3" id="btn-yes">
-                    <i class="fa-solid fa-heart-circle-check me-2"></i>Mau!
-                </button>
-                <button class="btn btn-light btn-lg rounded-pill custom-btn shadow border-1 border-light-subtle text-secondary" id="btn-no">
-                    <i class="fa-solid fa-heart-circle-xmark me-2"></i>Enggak
-                </button>
-            </div>
-        </div>
+    <div class="btn-area">
+      <button class="btn" id="btn-yes" type="button">
+        <i class="fa-solid fa-heart-circle-check" aria-hidden="true"></i> Mau!
+      </button>
+      <button class="btn" id="btn-no" type="button">
+        <i class="fa-solid fa-heart-circle-xmark" aria-hidden="true"></i> Enggak
+      </button>
     </div>
+  </main>
 
-    <!-- Bootstrap 5 JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Tone.js untuk membuat melodi piano custom langsung di browser -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
+  <script>
+    "use strict";
 
-    <script>
-        // 1. Efek Ketikan Otomatis (Typing Effect)
-        const poemText = "Roses are red,\nViolets are blue,\nDunia ini indahnya fana,\nYang nyata indahnya cuma kamu...\n\nMau gak menata masa depan bareng aku? 🥰🌸";
-        const element = document.getElementById("typed-poem");
-        let index = 0;
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-        function typeWriter() {
-            if (index < poemText.length) {
-                if (poemText.charAt(index) === '\n') {
-                    element.innerHTML += '<br>';
-                } else {
-                    element.innerHTML += poemText.charAt(index);
-                }
-                index++;
-                setTimeout(typeWriter, 65);
-            }
+    /* ---------- 1. Puisi yang mengetik & berganti bait ---------- */
+    (function typePoem() {
+      const el = document.getElementById("poem");
+
+      // beberapa bait romantis yang berganti bergantian
+      const verses = [
+        "Di antara miliaran manusia,\nhatiku cuma berhenti di kamu.\nKamu bukan sekadar pilihan,\nkamu adalah jawaban dari doaku. 🌙",
+        "Senja boleh pergi, bintang boleh padam,\ntapi rasaku ke kamu nggak pernah malam.\nKamu rumah yang selalu aku rindu,\ntempat pulang paling nyaman buatku. 🏡💕",
+        "Roses are red, violets are blue,\ndunia ini fana, yang nyata cuma kamu.\nAku nggak minta yang sempurna,\naku cuma minta kamu... selamanya. 🌹",
+        "Mau nggak, menata masa depan bareng aku?\nPelan-pelan aja, asal sama kamu.\nSampai rambut memutih, sampai lelah menua,\naku tetap mau memilih kamu. 🥰🌸",
+      ];
+
+      let v = 0;
+
+      function showVerse() {
+        const text = verses[v];
+        let i = 0;
+        el.innerHTML = "";
+
+        if (reduceMotion) {
+          el.innerHTML = text.replace(/\n/g, "<br>");
+          return;
         }
 
-        window.onload = function() {
-            typeWriter();
-            buatMawarGugur();
+        const cursor = document.createElement("span");
+        cursor.className = "cursor";
 
-            // Daftarkan semua event listener di sini (lebih aman daripada onclick inline
-            // yang bisa gagal di beberapa environment sandbox/preview).
-            document.getElementById('btn-no').addEventListener('mouseover', hindariTombol);
-            document.getElementById('btn-no').addEventListener('click', hindariTombol);
-            document.getElementById('btn-no').addEventListener('touchstart', hindariTombol);
-            document.getElementById('btn-yes').addEventListener('click', terimaKasih);
-            document.getElementById('musicBtn').addEventListener('click', toggleMusic);
-
-            // Musik hanya bisa mulai setelah ada interaksi user (kebijakan autoplay browser),
-            // jadi cukup klik ikon musik di pojok kanan atas.
-        };
-
-        // 2. Efek Kelopak Mawar, Bunga Sakura & Hati Gugur Ekstra Banyak
-        function buatMawarGugur() {
-            const container = document.getElementById('rose-container');
-            const kelopak = ['🌸', '🌹', '❤️', '✨', '🍃', '💕'];
-
-            setInterval(() => {
-                const petal = document.createElement('div');
-                petal.classList.add('rose-petal');
-                petal.innerText = kelopak[Math.floor(Math.random() * kelopak.length)];
-
-                petal.style.left = Math.random() * 100 + 'vw';
-                petal.style.animationDuration = Math.random() * 4 + 3 + 's'; // Beragam durasi agar estetik
-                petal.style.fontSize = Math.random() * 20 + 15 + 'px';
-
-                container.appendChild(petal);
-                setTimeout(() => { petal.remove(); }, 6000);
-            }, 200); // Interval lebih rapat agar elemennya banyak
-        }
-
-        // 3. Efek Jejak Kursor Berkilau (Sparkle Magic)
-        document.addEventListener('mousemove', function(e) {
-            const sparkle = document.createElement('div');
-            sparkle.classList.add('sparkle');
-            sparkle.style.left = e.pageX + 'px';
-            sparkle.style.top = e.pageY + 'px';
-
-            // Ukuran acak
-            const size = Math.random() * 8 + 4;
-            sparkle.style.width = size + 'px';
-            sparkle.style.height = size + 'px';
-
-            document.body.appendChild(sparkle);
-            setTimeout(() => { sparkle.remove(); }, 800);
-        });
-
-        // 4. Logika Tombol "Enggak" Menghindar (Sensitif & Agresif)
-        function hindariTombol() {
-            const btnNo = document.getElementById('btn-no');
-            const x = Math.random() * (window.innerWidth - 150) - (window.innerWidth / 2) + 75;
-            const y = Math.random() * (window.innerHeight - 100) - (window.innerHeight / 2) + 50;
-            btnNo.style.transform = `translate(${x}px, ${y}px)`;
-        }
-
-        // 5. Musik Piano Custom (dibuat langsung dengan Tone.js, bukan file mp3)
-        let pianoSynth = null;
-        let padSynth = null;
-        let melodyPart = null;
-        let musicPlaying = false;
-
-        function buatMusik() {
-            // Synth melodi utama, suaranya lembut mirip piano/musicbox
-            pianoSynth = new Tone.PolySynth(Tone.Synth, {
-                oscillator: { type: 'sine' },
-                envelope: { attack: 0.02, decay: 0.4, sustain: 0.25, release: 1.4 }
-            }).toDestination();
-            pianoSynth.volume.value = -8;
-
-            // Synth pad untuk chord latar, biar terasa "penuh" & hangat
-            padSynth = new Tone.PolySynth(Tone.Synth, {
-                oscillator: { type: 'triangle' },
-                envelope: { attack: 1.2, decay: 0.5, sustain: 0.6, release: 2.5 }
-            }).toDestination();
-            padSynth.volume.value = -18;
-
-            // Melodi original, sederhana, nuansa hangat & romantis (C mayor)
-            const melodi = [
-                { time: '0:0', note: 'E4', dur: '4n' },
-                { time: '0:1', note: 'G4', dur: '4n' },
-                { time: '0:2', note: 'C5', dur: '4n' },
-                { time: '0:3', note: 'B4', dur: '4n' },
-                { time: '1:0', note: 'A4', dur: '4n' },
-                { time: '1:1', note: 'F4', dur: '4n' },
-                { time: '1:2', note: 'G4', dur: '2n' },
-                { time: '2:0', note: 'D4', dur: '4n' },
-                { time: '2:1', note: 'F4', dur: '4n' },
-                { time: '2:2', note: 'A4', dur: '4n' },
-                { time: '2:3', note: 'G4', dur: '4n' },
-                { time: '3:0', note: 'E4', dur: '4n' },
-                { time: '3:1', note: 'C4', dur: '4n' },
-                { time: '3:2', note: 'D4', dur: '2n' }
-            ];
-
-            // Chord pad yang menemani melodi, berganti tiap birama
-            const chordPad = [
-                { time: '0:0', notes: ['C3', 'E3', 'G3'] },
-                { time: '1:0', notes: ['F3', 'A3', 'C4'] },
-                { time: '2:0', notes: ['D3', 'F3', 'A3'] },
-                { time: '3:0', notes: ['G3', 'B3', 'D4'] }
-            ];
-
-            melodyPart = new Tone.Part((time, val) => {
-                pianoSynth.triggerAttackRelease(val.note, val.dur, time);
-            }, melodi);
-            melodyPart.loop = true;
-            melodyPart.loopEnd = '4m';
-
-            const padPart = new Tone.Part((time, val) => {
-                padSynth.triggerAttackRelease(val.notes, '1m', time);
-            }, chordPad);
-            padPart.loop = true;
-            padPart.loopEnd = '4m';
-
-            melodyPart.start(0);
-            padPart.start(0);
-            Tone.Transport.bpm.value = 76;
-        }
-
-        async function toggleMusic() {
-            const btn = document.getElementById('musicBtn');
-            await Tone.start();
-
-            if (!pianoSynth) {
-                buatMusik();
-            }
-
-            if (!musicPlaying) {
-                Tone.Transport.start();
-                musicPlaying = true;
-                btn.innerHTML = '<i class="fa-solid fa-volume-high text-danger"></i>';
-            } else {
-                Tone.Transport.pause();
-                musicPlaying = false;
-                btn.innerHTML = '<i class="fa-solid fa-music text-danger"></i>';
-            }
-        }
-
-        // 6. Aksi saat Tombol "Mau" diklik (Modal Kustom Kreatif)
-        function terimaKasih() {
-            // Membuat modal pop-up mewah di layar secara dinamis
-            const modalHtml = `
-            <div id="loveModal" style="position:fixed; top:0; left:0;
-            width:100vw; height:100vh; background:rgba(0,0,0,0.5); backdrop-filter:blur(8px);
-            display:flex; justify-content:center; align-items:center; z-index:9999; opacity:0;
-            transition:opacity 0.4s ease;">
-                <div style="background:white; padding:40px;
-                border-radius:24px; text-align:center; max-width:400px; width:90%; box-shadow:0 15px 30px rgba(0,0,0,0.2);
-                transform:scale(0.7); transition:transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);">
-                    <div style="font-size:60px; color:#ff4d7d;
-                    animation: beat 0.6s infinite alternate;">💖</div>
-                    <h2 style="color:#d11a53; font-weight:bold; margin-top:15px;">Diterima! 🥰</h2>
-                    <p style="color:#666;
-                    margin-top:10px; font-size:15px;">Kamu adalah keputusan terindah yang pernah aku pilih. Makasih ya udah mau jadi bagian dari ceritaku! 🌹</p>
-                    <button
-                    id="btnTutupModal" class="btn btn-danger rounded-pill px-4 mt-3 shadow" style="background: linear-gradient(45deg, #ff4d7d, #ff758c);
-                    border:none;">I Love You Too! ❤️</button>
-                </div>
-            </div>`;
-            document.body.insertAdjacentHTML('beforeend', modalHtml);
-
-            const modal = document.getElementById('loveModal');
-            document.getElementById('btnTutupModal').addEventListener('click', tutupModal);
+        function tick() {
+          if (i < text.length) {
+            const ch = text.charAt(i);
+            cursor.remove();
+            el.innerHTML += ch === "\n" ? "<br>" : ch;
+            el.appendChild(cursor);
+            i++;
+            setTimeout(tick, 55);
+          } else {
+            // tahan sebentar, lalu lanjut ke bait berikutnya (berulang)
             setTimeout(() => {
-                modal.style.opacity = '1';
-                modal.children[0].style.transform = 'scale(1)';
-            }, 50);
+              v = (v + 1) % verses.length;
+              showVerse();
+            }, 3800);
+          }
         }
+        tick();
+      }
 
-        function tutupModal() {
-            const modal = document.getElementById('loveModal');
-            modal.style.opacity = '0';
-            modal.children[0].style.transform = 'scale(0.7)';
-            setTimeout(() => { modal.remove(); }, 400);
+      showVerse();
+    })();
+
+    /* ---------- 2. Kelopak & hati berguguran ---------- */
+    (function fallingPetals() {
+      if (reduceMotion) return;
+      const layer = document.getElementById("particle-layer");
+      const items = ["🌸", "🌹", "❤️", "✨", "🍃", "💕", "💖"];
+
+      setInterval(() => {
+        const petal = document.createElement("div");
+        petal.className = "petal";
+        petal.textContent = items[Math.floor(Math.random() * items.length)];
+        petal.style.left = Math.random() * 100 + "vw";
+        petal.style.animationDuration = Math.random() * 4 + 3 + "s";
+        petal.style.fontSize = Math.random() * 20 + 15 + "px";
+        layer.appendChild(petal);
+        setTimeout(() => petal.remove(), 7000);
+      }, 240);
+    })();
+
+    /* ---------- 3. Jejak kilauan (pointer halus saja) ---------- */
+    (function sparkleTrail() {
+      if (reduceMotion || !window.matchMedia("(pointer: fine)").matches) return;
+      const layer = document.getElementById("particle-layer");
+
+      window.addEventListener("pointermove", (e) => {
+        const s = document.createElement("div");
+        s.className = "sparkle";
+        const size = Math.random() * 8 + 4;
+        s.style.left = e.clientX + "px";
+        s.style.top = e.clientY + "px";
+        s.style.width = size + "px";
+        s.style.height = size + "px";
+        layer.appendChild(s);
+        setTimeout(() => s.remove(), 800);
+      });
+    })();
+
+    /* ---------- 4. Tombol "Enggak" yang menghindar ---------- */
+    (function dodgeButton() {
+      const btn = document.getElementById("btn-no");
+
+      function move() {
+        const bw = btn.offsetWidth;
+        const bh = btn.offsetHeight;
+        const maxX = window.innerWidth - bw - 12;
+        const maxY = window.innerHeight - bh - 12;
+        const x = Math.max(12, Math.random() * maxX);
+        const y = Math.max(12, Math.random() * maxY);
+
+        btn.classList.add("dodging");
+        btn.style.left = x + "px";
+        btn.style.top = y + "px";
+      }
+
+      btn.addEventListener("mouseenter", move);
+      btn.addEventListener("pointerdown", (e) => {
+        e.preventDefault();
+        move();
+      });
+    })();
+
+    /* ---------- 5. Musik piano romantis (Tone.js + reverb) ---------- */
+    (function music() {
+      const btn = document.getElementById("musicBtn");
+      const hint = document.getElementById("musicHint");
+      let built = false;
+      let playing = false;
+
+      function build() {
+        // reverb untuk kesan hangat & "ruang"
+        const reverb = new Tone.Reverb({ decay: 4, wet: 0.35 }).toDestination();
+
+        // melodi utama — lembut seperti music box / piano
+        const piano = new Tone.PolySynth(Tone.Synth, {
+          oscillator: { type: "sine" },
+          envelope: { attack: 0.02, decay: 0.5, sustain: 0.3, release: 1.8 },
+        }).connect(reverb);
+        piano.volume.value = -9;
+
+        // pad hangat sebagai latar chord
+        const pad = new Tone.PolySynth(Tone.Synth, {
+          oscillator: { type: "triangle" },
+          envelope: { attack: 1.4, decay: 0.6, sustain: 0.7, release: 3 },
+        }).connect(reverb);
+        pad.volume.value = -20;
+
+        // bass lembut
+        const bass = new Tone.Synth({
+          oscillator: { type: "sine" },
+          envelope: { attack: 0.05, decay: 0.3, sustain: 0.6, release: 1.5 },
+        }).connect(reverb);
+        bass.volume.value = -16;
+
+        // melodi 8 birama, mengalir & manis (C mayor)
+        const melody = [
+          { time: "0:0", note: "E4", dur: "4n" },
+          { time: "0:1", note: "G4", dur: "4n" },
+          { time: "0:2", note: "C5", dur: "4n" },
+          { time: "0:3", note: "B4", dur: "4n" },
+          { time: "1:0", note: "A4", dur: "4n" },
+          { time: "1:1", note: "F4", dur: "4n" },
+          { time: "1:2", note: "G4", dur: "2n" },
+          { time: "2:0", note: "D4", dur: "4n" },
+          { time: "2:1", note: "F4", dur: "4n" },
+          { time: "2:2", note: "A4", dur: "4n" },
+          { time: "2:3", note: "G4", dur: "4n" },
+          { time: "3:0", note: "E4", dur: "4n" },
+          { time: "3:1", note: "C4", dur: "4n" },
+          { time: "3:2", note: "D4", dur: "2n" },
+          { time: "4:0", note: "C5", dur: "4n" },
+          { time: "4:1", note: "B4", dur: "4n" },
+          { time: "4:2", note: "A4", dur: "4n" },
+          { time: "4:3", note: "G4", dur: "4n" },
+          { time: "5:0", note: "F4", dur: "4n" },
+          { time: "5:1", note: "A4", dur: "4n" },
+          { time: "5:2", note: "C5", dur: "2n" },
+          { time: "6:0", note: "B4", dur: "4n" },
+          { time: "6:1", note: "G4", dur: "4n" },
+          { time: "6:2", note: "A4", dur: "4n" },
+          { time: "6:3", note: "F4", dur: "4n" },
+          { time: "7:0", note: "E4", dur: "2n" },
+          { time: "7:2", note: "C4", dur: "2n" },
+        ];
+
+        const chords = [
+          { time: "0:0", notes: ["C3", "E3", "G3"] },
+          { time: "1:0", notes: ["F3", "A3", "C4"] },
+          { time: "2:0", notes: ["D3", "F3", "A3"] },
+          { time: "3:0", notes: ["G3", "B3", "D4"] },
+          { time: "4:0", notes: ["A2", "C3", "E3"] },
+          { time: "5:0", notes: ["F3", "A3", "C4"] },
+          { time: "6:0", notes: ["G3", "B3", "D4"] },
+          { time: "7:0", notes: ["C3", "E3", "G3"] },
+        ];
+
+        const bassline = [
+          { time: "0:0", note: "C2" },
+          { time: "1:0", note: "F2" },
+          { time: "2:0", note: "D2" },
+          { time: "3:0", note: "G2" },
+          { time: "4:0", note: "A1" },
+          { time: "5:0", note: "F2" },
+          { time: "6:0", note: "G2" },
+          { time: "7:0", note: "C2" },
+        ];
+
+        const melodyPart = new Tone.Part((time, v) => {
+          piano.triggerAttackRelease(v.note, v.dur, time);
+        }, melody);
+        melodyPart.loop = true;
+        melodyPart.loopEnd = "8m";
+        melodyPart.start(0);
+
+        const padPart = new Tone.Part((time, v) => {
+          pad.triggerAttackRelease(v.notes, "1m", time);
+        }, chords);
+        padPart.loop = true;
+        padPart.loopEnd = "8m";
+        padPart.start(0);
+
+        const bassPart = new Tone.Part((time, v) => {
+          bass.triggerAttackRelease(v.note, "1m", time);
+        }, bassline);
+        bassPart.loop = true;
+        bassPart.loopEnd = "8m";
+        bassPart.start(0);
+
+        Tone.Transport.bpm.value = 72;
+        built = true;
+      }
+
+      btn.addEventListener("click", async () => {
+        await Tone.start();
+        if (!built) build();
+        hint.classList.add("hide");
+
+        if (!playing) {
+          Tone.Transport.start();
+          playing = true;
+          btn.classList.add("playing");
+          btn.innerHTML = '<i class="fa-solid fa-volume-high" aria-hidden="true"></i>';
+          btn.setAttribute("aria-label", "Hentikan musik");
+        } else {
+          Tone.Transport.pause();
+          playing = false;
+          btn.classList.remove("playing");
+          btn.innerHTML = '<i class="fa-solid fa-music" aria-hidden="true"></i>';
+          btn.setAttribute("aria-label", "Putar musik");
         }
-    </script>
+      });
+
+      // sembunyikan petunjuk otomatis setelah beberapa detik
+      setTimeout(() => hint.classList.add("hide"), 6000);
+    })();
+
+    /* ---------- 6. Tombol "Mau" -> modal ---------- */
+    (function acceptButton() {
+      document.getElementById("btn-yes").addEventListener("click", () => {
+        const modal = document.createElement("div");
+        modal.className = "modal";
+        modal.innerHTML =
+          '<div class="modal__box">' +
+          '<div class="modal__emoji">💖</div>' +
+          '<h2 class="modal__title">Akhirnya... kamu bilang iya 🥰</h2>' +
+          '<p class="modal__text">Makasih ya udah mau. Mulai hari ini, setiap pagiku punya alasan ' +
+          "buat senyum, dan setiap malamku punya nama buat didoakan: kamu. " +
+          "Aku janji jaga kamu sebaik-baiknya. 🌹✨</p>" +
+          '<button class="modal__btn" type="button">I Love You Too! ❤️</button>' +
+          "</div>";
+        document.body.appendChild(modal);
+
+        requestAnimationFrame(() => modal.classList.add("show"));
+
+        function close() {
+          modal.classList.remove("show");
+          setTimeout(() => modal.remove(), 400);
+        }
+        modal.querySelector(".modal__btn").addEventListener("click", close);
+        modal.addEventListener("click", (e) => {
+          if (e.target === modal) close();
+        });
+      });
+    })();
+  </script>
 </body>
 </html>
